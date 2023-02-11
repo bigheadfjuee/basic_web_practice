@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pure JS</title>
+  <meta name="author" content="Tony Lee">
+</head>
+
+<body>
+  <div>
+    <label id="labelCount">0</label>
+    <button id="btnCount">Count++</button>
+  </div>
+
+  <div>
+    <input id="input" type="text" value="text">
+    <label id="label">text</label>
+  </div>
+
+  <div>
+    <ul id="list">
+    </ul>
+  </div>
+
+  <script>
+
+    let count = 0
+    document.getElementById('btnCount').addEventListener('click', increaseCount)
+    function increaseCount(target) {
+      count++
+      document.getElementById('labelCount').textContent = count
+    }
+
+    let text = ''
+    const input = document.getElementById('input')
+    const inputChange = function (event) {
+      text = input.value
+      // text = event.target.value
+      document.getElementById('label').textContent = text
+    }
+    input.addEventListener('input', inputChange)
+
+
+
+    const array = [1, 2, 3, 4, 5, 6]
+    const list = document.getElementById('list')
+    array.forEach(element => {
+      const node = document.createElement('li')
+      node.textContent = element
+      list.appendChild(node)
+    });
+
+  </script>
+</body>
+
+</html>
