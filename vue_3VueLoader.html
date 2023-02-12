@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vue</title>
+  <meta name="author" content="Tony Lee">
+  <link rel="stylesheet" href="./styles/style.css">
+</head>
+
+<body>
+  <div id="app"></div>
+
+  <script src="https://unpkg.com/vue@next"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue3-sfc-loader/dist/vue3-sfc-loader.js"></script>
+  <script>
+    const { createApp, ref } = Vue
+
+    // https://www.npmjs.com/package/vue3-sfc-loader
+    const options = {
+      moduleCache: {
+        vue: Vue
+      },
+      async getFile(url) {
+        
+        const res = await fetch(url);
+        if ( !res.ok )
+          throw Object.assign(new Error(res.statusText + ' ' + url), { res });
+        return {
+          getContentData: asBinary => asBinary ? res.arrayBuffer() : res.text(),
+        }
+      },
+      addStyle(textContent) {
+
+        const style = Object.assign(document.createElement('style'), { textContent });
+        const ref = document.head.getElementsByTagName('style')[0] || null;
+        document.head.insertBefore(style, ref);
+      },
+    }
+
+    const { loadModule } = window['vue3-sfc-loader'];
+
+    const app = Vue.createApp({
+      components: {
+        'my-component': Vue.defineAsyncComponent( () => loadModule('./myComponent.vue', options) )
+      },
+      template: '<my-component></my-component>'
+    });
+
+    app.mount('#app');
+  </script>
+</body>
+
+</html>

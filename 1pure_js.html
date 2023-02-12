@@ -12,8 +12,8 @@
 
 <body>
   <div>
-    <label id="labelCount">0</label>
-    <button id="btnCount">Count++</button>
+    <label id="labelCount"></label>
+    <button id="btnCount">++Count</button>
   </div>
 
   <div>
@@ -27,11 +27,13 @@
   </div>
 
   <script>
-
     let count = 0
+    const labelCount = document.getElementById('labelCount')
+    labelCount.textContent = count
+
     document.getElementById('btnCount').addEventListener('click', increaseCount)
     function increaseCount(event) {
-      document.getElementById('labelCount').textContent = count++
+      labelCount.textContent  = ++count
     }
 
     let text = ''
