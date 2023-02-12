@@ -7,6 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Pure JS</title>
   <meta name="author" content="Tony Lee">
+  <link rel="stylesheet" href="./styles/style.css">
 </head>
 
 <body>
@@ -29,21 +30,18 @@
 
     let count = 0
     document.getElementById('btnCount').addEventListener('click', increaseCount)
-    function increaseCount(target) {
-      count++
-      document.getElementById('labelCount').textContent = count
+    function increaseCount(event) {
+      document.getElementById('labelCount').textContent = count++
     }
 
     let text = ''
     const input = document.getElementById('input')
     const inputChange = function (event) {
-      text = input.value
-      // text = event.target.value
+      // text = input.value
+      text = event.target.value
       document.getElementById('label').textContent = text
     }
     input.addEventListener('input', inputChange)
-
-
 
     const array = [1, 2, 3, 4, 5, 6]
     const list = document.getElementById('list')
