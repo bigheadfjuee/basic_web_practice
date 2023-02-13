@@ -1,15 +1,35 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+.container {
+  margin: 0 auto;
+  width: 600px;
 }
 
 div {
-  margin: 2rem;
+  box-sizing: border-box;
+  padding: 20px;
+}
+div label {
+  margin: 0.5em;
 }
 div button {
-  padding: 0.5rem;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.5em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #f9f9f9;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+div button:hover {
+  border-color: #646cff;
+}
+div button:focus, div button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
 }
 div input {
-  padding: 0.5rem;
+  padding: 0.5em;
+}
+div li {
+  padding: 0.3em;
 }/*# sourceMappingURL=style.css.map */

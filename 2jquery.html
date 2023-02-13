@@ -7,40 +7,59 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>jQuery</title>
   <meta name="author" content="Tony Lee">
-  <link rel="stylesheet" href="./styles/style.css">  
+  <link rel="stylesheet" href="./styles/style.css">
 </head>
 
 <body>
-  <div>
-    <label id="labelCount"></label>
-    <button id="btnCount">++Count</button>
-  </div>
+  <div class="container">
 
-  <div>
-    <input id="input" type="text" value="text">
-    <label id="label">text</label>
-  </div>
+    <div>
+      <label id="labelCount"></label>
+      <button id="btnCount">++Count</button>
+    </div>
 
-  <div>
-    <ul id="list">
-    </ul>
+    <div>
+      <input id="input" type="text" value="text">
+      <label id="label">text</label>
+    </div>
+
+    <div>
+      <button id="btnGetApiData">Get API Data</button>
+      <ul id="list">
+      </ul>
+    </div>
+    
   </div>
 
   <!-- CDN -->
   <script src="https://code.jquery.com/jquery-3.6.3.min.js"
     integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
   <script>
+    // 按鈕累加計數
     let count = 0
     $('#labelCount').text(count)
-
     $('#btnCount').click(function () { $('#labelCount').text(++count) })
 
+    // 偵測 input 內容變化，並同步輸出至 label
     $('#input').on('input', (event) => $('#label').text(event.target.value))
 
-    const array = [1, 2, 3, 4, 5, 6]
-    array.forEach(element => {
-      $('#list').append($('<li></li>').text(element))
-    })
+    // 模擬呼叫 api 後，取得回傳資料 array 動態列出內容
+    const getApiData = () => {
+      // Clear
+      $('#list').empty()
+
+      const base = Date.now();
+      let array = []
+      for (let i = 0; i < 5; i++) {
+        array.push(base + i)
+      }
+
+      array.forEach(element => {
+        $('#list').append($('<li></li>').text(element))
+      })
+    }
+    $('#btnGetApiData').click(getApiData)
+
   </script>
 </body>
 
