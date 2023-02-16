@@ -2,55 +2,23 @@
 
 const e = React.createElement;
 
-const title = e(
-  'h1', null, 'React Component'
-)
-
-const labelCount = e(
-  'lable',
-  { id: 'labelCount', onclick: () => this.getState() },
-)
-
-const btnCount = e(
-  'button',
-  { id: 'btnCount' },
-  '++Count'
-)
+const title = e('h1', null, 'React - Class Component')
 
 const blockA = e(
-  'div', null, [labelCount, btnCount]
-)
-
-const input = e(
-  'input',
-  { type: 'text', value: 'text' }
-)
-
-const label = e(
-  'label',
-  { id: 'label' },
-  'text'
-)
+  'div', null, [
+  e('label', { id: 'labelCount', onClick: () => this.getState() })
+  , e('button', { id: 'btnCount' }, '++Count')
+])
 
 const blockB = e(
-  'div', null, [input, label]
-)
-
-const btnGetApiData = e(
-  'button',
-  { id: 'btnGetApiData' },
-  'Get API Data'
-)
-
-const list = e(
-  'ul',
-  { id: 'list' }
-)
+  'div', null, [
+  e('input', { type: 'text' }), e('label', { id: 'label' }, 'text')
+])
 
 const blockC = e(
-  'div', null, [btnGetApiData, list]
-)
-
+  'div', null, [
+  e('button', { id: 'btnGetApiData' }, 'Get API Data')
+])
 
 class MyReactComponent extends React.Component {
   constructor(props) {

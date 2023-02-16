@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JS - innerHtml</title>
+  <meta name="author" content="Tony Lee">
+  <link rel="stylesheet" href="./styles/style.css">
+</head>
+
+<body>
+  <div class="container" id="app">   
+  </div>
+
+  <script>
+    const app = document.getElementById('app')
+    const html = `
+    <h1>All JS</h1>
+
+    <div>
+      <label id="labelCount"></label>
+      <button id="btnCount">++Count</button>
+    </div>
+
+    <div>
+      <input id="input" type="text" value="text">
+      <label id="label">text</label>
+    </div>
+
+    <div>
+      <button id="btnGetApiData">Get API Data</button>
+      <ul id="list">
+      </ul>
+    </div>
+    `
+
+    app.innerHTML = html
+    
+    // 按鈕累加計數
+    let count = 0
+    const labelCount = document.getElementById('labelCount')
+    labelCount.textContent = count
+
+    document.getElementById('btnCount').addEventListener('click', increaseCount)
+    function increaseCount(event) {
+      labelCount.textContent = ++count
+    }
+
+    // 偵測 input 內容變化，並同步輸出至 label
+    let text = ''
+    const input = document.getElementById('input')
+    const inputChange = function (event) {
+      // text = input.value
+      text = event.target.value
+      document.getElementById('label').textContent = text
+    }
+    input.addEventListener('input', inputChange)
+
+    // 模擬呼叫 api 後，取得回傳資料 array 動態列出內容
+    const getApiData = () => {
+      const list = document.getElementById('list')
+
+      // Clear
+      // list.innerHTML = ''
+      // Call new api
+      list.replaceChildren()
+
+      const base = Date.now();
+      let items = []
+      for (let i = 0; i < 5; i++) {
+        items.push(base + i)
+      }
+
+      items.forEach(element => {
+        const node = document.createElement('li')
+        node.textContent = element
+        list.appendChild(node)
+      })
+    }
+    document.getElementById('btnGetApiData').addEventListener('click', getApiData)
+
+
+  </script>
+</body>
+
+</html>

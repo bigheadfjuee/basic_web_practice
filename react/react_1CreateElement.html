@@ -23,59 +23,29 @@
 
     const e = React.createElement // 可少打很多字
 
-    const title = e(
-      'h1', null, 'React - createElement'
-    )
-
-    const labelCount = e(
-      'label',
-      { id: 'labelCount', onClick: () => this.getState() },
-    )
-
-    const btnCount = e(
-      'button',
-      { id: 'btnCount' },
-      '++Count'
-    )
+    const title = e('h1', null, 'React - createElement')
 
     const blockA = e(
-      'div', null, [labelCount, btnCount]
-    )
-
-    const input = e(
-      'input',
-      { type: 'text', value: 'text' }
-    )
-
-    const label = e(
-      'label',
-      { id: 'label', key: Date() },
-      'text'
-    )
+      'div', null, [
+      e('label', { id: 'labelCount', onClick: () => this.getState() })
+      , e('button', { id: 'btnCount' }, '++Count')
+    ])
 
     const blockB = e(
-      'div', null, [input, label]
-    )
-
-    const btnGetApiData = e(
-      'button',
-      { id: 'btnGetApiData' },
-      'Get API Data'
-    )
-
-    const list = e(
-      'label',  null, 'list'
-    )
+      'div', null, [
+      e('input', { type: 'text' }), e('label', { id: 'label' }, 'text')
+    ])
 
     const blockC = e(
-      'div', null, [btnGetApiData, list]
-    )
+      'div', null, [
+      e('button', { id: 'btnGetApiData' }, 'Get API Data')
+    ])
 
     class App extends React.Component {
-      state = {
-        count: 0,
-        text: '',
-        items: []
+      constructor(props) {
+        super(props);
+        // Don't call this.setState() here!
+        this.state = { counter: 0, text:'', items: [] };
       }
 
       increaseCount = () => {
@@ -98,25 +68,22 @@
         }
 
         this.setState({
-          itmes: items
+          items: items
         })
       }
 
       render() {
-        return e('div', null,
-          [title, blockA, blockB, blockC]
-        )
+        return e('div', null, [
+          title, blockA, blockB, blockC
+        ])
       }
     }
 
     // ## ReactDOM.render is no longer supported in React 18. Use createRoot ##
-    // ReactDOM.render(
-    //   APP(),
-    //   document.querySelector('#root')
-    // );
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(e(App, { title: 'React - createElement' }),
+      document.querySelector('#root'));
 
-    const root = ReactDOM.createRoot(document.getElementById("root"));
-    root.render(new App())
   </script>
 
 </body>
