@@ -15,7 +15,7 @@
   <div>
     <button @click="getApiData">Get API Data</button>
     <ul>
-      <li v-for="item in array" key="item">{{ item }}</li>
+      <li v-for="item in items" key="item">{{ item }}</li>
     </ul>
   </div>
 </template>
@@ -27,16 +27,16 @@
 <script setup>
 // Vue3 Composition API + setup 語法糖 就像在寫一般的 js 
 import { ref } from 'vue'
-const title = 'VueLoader'
+const title = 'Vue - Loader'
 const count = ref(0)
 const text = ref('text')
-const array = ref([])
+const items = ref([])
 
 const getApiData = () => {
-  array.value = []
+  items.value = []
   const base = Date.now();
   for (let i = 0; i < 5; i++) {
-    array.value.push(base + i)
+    items.value.push(base + i)
   }
 }
 </script>

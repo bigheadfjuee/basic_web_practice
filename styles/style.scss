@@ -7,24 +7,30 @@
 div {
   box-sizing: border-box;
   padding: 20px;
+  background-color: GhostWhite;
+
+  h1 {
+    text-align: center;
+  }
 
   label {
     margin: 0.5em;
+    font-size: x-large;
   }
 
   button {
     border-radius: 8px;
-    border: 1px solid transparent;
+    border: 3px solid transparent;
     padding: 0.5em;
     font-size: 1em;
     font-weight: 500;
     font-family: inherit;
-    background-color: #f9f9f9;
+    background-color: LightSkyBlue;
     cursor: pointer;
     transition: border-color 0.25s;
 
     &:hover {
-      border-color: #646cff;
+      border-color: dodgerblue;
     }
 
     &:focus,
@@ -35,9 +41,11 @@ div {
 
   input {
     padding: 0.5em;
+    font-size: large;
   }
 
   li {
     padding: 0.3em;
+    font-size: large;
   }
 }

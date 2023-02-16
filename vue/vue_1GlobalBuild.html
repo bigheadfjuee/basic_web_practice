@@ -7,31 +7,39 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Vue - Global Build</title>
   <meta name="author" content="Tony Lee">
-  <link rel="stylesheet" href="./styles/style.css">
+  <link rel="stylesheet" href="../styles/style.css">
 </head>
 
 <body>
-  <div class="container" id="app">
-    <h1>{{title }}</h1>
+
+  <div class="container" id="app" v-cloak>
+    <h1>{{ title }}</h1>
 
     <div>
-      <label>{{count}}</label>
+      <label>{{ count }}</label>
       <button @click="count++">Count++</button>
     </div>
 
     <div>
       <input type="text" v-model="text">
-      <label id="label">{{text}}</label>
+      <label id="label">{{ text }}</label>
     </div>
 
     <div>
       <button @click="getApiData">Get API Data</button>
       <ul>
-        <li v-for="item in array">{{item}}</li>
+        <li v-for="item in itmes">{{ item }}</li>
       </ul>
     </div>
 
   </div>
+
+  <style>
+    /* 可避免 Vue render 的一瞬間看到 {{ xxx }}，註解它，重新整理網頁看看差別 */
+    [v-cloak] {
+      display: none;
+    }
+  </style>
 
   <!-- Global Build -->
   <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
@@ -44,18 +52,18 @@
         const title = ref('Vue - Global Build')
         const count = ref(0)
         const text = ref('text')
-        const array = ref([])
+        const itmes = ref([])
 
         function getApiData() {
-          array.value = [] // clear
+          itmes.value = [] // clear
 
           const base = Date.now();
           for (let i = 0; i < 5; i++) {
-            array.value.push(base + i)
+            itmes.value.push(base + i)
           }
         }
 
-        return { title, count, text, array, getApiData }
+        return { title, count, text, itmes, getApiData }
       }
     }).mount('#app')
 
@@ -65,16 +73,16 @@
             return {
               count: 0,
               text: "text",
-              array: [],
+              itmes: [],
             }
           },
           methods: {
             getApiData() {
-              this.array = [] // clear
+              this.itmes = [] // clear
     
               const base = Date.now();
               for (let i = 0; i < 5; i++) {
-                this.array.push(base + i)
+                this.itmes.push(base + i)
               }
             },
           },
@@ -82,6 +90,7 @@
 
 
   </script>
+
 </body>
 
 </html>

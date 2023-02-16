@@ -12,6 +12,7 @@
 
 <body>
   <div class="container">
+    <h1>jQuery</h1>
 
     <div>
       <label id="labelCount"></label>
@@ -49,12 +50,12 @@
       $('#list').empty()
 
       const base = Date.now();
-      let array = []
+      let items = []
       for (let i = 0; i < 5; i++) {
-        array.push(base + i)
+        items.push(base + i)
       }
 
-      array.forEach(element => {
+      items.forEach(element => {
         $('#list').append($('<li></li>').text(element))
       })
     }

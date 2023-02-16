@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>React JSX</title>
+  <meta name="author" content="Tony Lee">
+  <link rel="stylesheet" href="../styles/style.css">
+</head>
+
+<body>
+  <div class="container" id="root"></div>
+
+  <!-- React CDN -->
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.23.1/babel.min.js"></script>
+
+  <!-- 引入 babel 後，就可直接使用 JSX  -->
+  <script type="text/babel">
+
+    const App = (props) => {
+      const { title } = props
+      const [count, setCount] = React.useState(0)
+      const [text, setText] = React.useState('text')
+      const [items , setItems] = React.useState([])
+
+      const handleInput = (e) => {
+        setText(e.target.value)
+      }
+
+      const getApiData = () => {
+        const base = Date.now();
+        let items = []
+        for (let i = 0; i < 5; i++) {
+          items.push(base + i)
+        }
+
+        setItems(items)
+      }
+
+      return (
+        <div>
+          <h1> {title} </h1>
+          <div>
+            <label>{count}</label>
+            <button onClick={() => setCount(count + 1)}>++Count</button>
+          </div>
+
+          <div>
+            <input type="text" defaultValue={text} onChange={handleInput} />
+            <label>{text}</label>
+          </div>
+
+          <div>
+            <button onClick={getApiData}>Get API Data</button>
+            <ul>
+              {items.map(item => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      );
+
+    }
+
+    const root = ReactDOM.createRoot(document.getElementById("root"));
+    root.render(
+      <React.StrictMode>
+        <App title='React - Hooks' />
+      </React.StrictMode>
+    );
+
+  </script>
+
+</body>
+
+</html>

@@ -1,22 +1,22 @@
 // my-component.js
 
 const template = `
-<h1>
+<h1>{{ title }}</h1>
 
 <div>
-<label>{{count}}</label>
+<label>{{ count }}</label>
 <button @click="count++">Count++</button>
 </div>
 
 <div>
 <input type="text" v-model="text">
-<label>{{text}}</label>
+<label>{{ text }}</label>
 </div>
 
 <div>
 <button @click="getApiData">Get API Data</button>
 <ul>
-  <li v-for="item in array">{{item}}</li>
+  <li v-for="item in itmes">{{ item }}</li>
 </ul>
 </div>
 `    
@@ -30,18 +30,18 @@ export default {
     const title = ref('Vue - ES Module')
     const count = ref(0)
     const text = ref('text')
-    const array = ref([])
+    const itmes = ref([])
 
     function getApiData() {
-      array.value = [] // clear
+      itmes.value = [] // clear
 
       const base = Date.now();
       for (let i = 0; i < 5; i++) {
-        array.value.push(base + i)
+        itmes.value.push(base + i)
       }
     }
 
-    return { count, text, array, getApiData }
+    return { title, count, text, itmes, getApiData }
   }
 }
 

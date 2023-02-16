@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>React - createElement</title>
+  <meta name="author" content="Tony Lee">
+  <link rel="stylesheet" href="../styles/style.css">
+</head>
+
+<body>
+  <div class="container" id="root"></div>
+
+  <!-- React CDN -->
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+
+  <script>
+    // Tony : 使用 React.createElement 就是這麼麻煩
+    // 體驗過原本的寫法，就會知道 JSX 語法糖的好處
+
+    const e = React.createElement // 可少打很多字
+
+    const title = e(
+      'h1', null, 'React - createElement'
+    )
+
+    const labelCount = e(
+      'label',
+      { id: 'labelCount', onClick: () => this.getState() },
+    )
+
+    const btnCount = e(
+      'button',
+      { id: 'btnCount' },
+      '++Count'
+    )
+
+    const blockA = e(
+      'div', null, [labelCount, btnCount]
+    )
+
+    const input = e(
+      'input',
+      { type: 'text', value: 'text' }
+    )
+
+    const label = e(
+      'label',
+      { id: 'label', key: Date() },
+      'text'
+    )
+
+    const blockB = e(
+      'div', null, [input, label]
+    )
+
+    const btnGetApiData = e(
+      'button',
+      { id: 'btnGetApiData' },
+      'Get API Data'
+    )
+
+    const list = e(
+      'label',  null, 'list'
+    )
+
+    const blockC = e(
+      'div', null, [btnGetApiData, list]
+    )
+
+    class App extends React.Component {
+      state = {
+        count: 0,
+        text: '',
+        items: []
+      }
+
+      increaseCount = () => {
+        this.setState({
+          count: this.state.count + 1
+        })
+      }
+
+      handleInput = (e) => {
+        this.setState({
+          text: e.target.value
+        })
+      }
+
+      getApiData = () => {
+        const base = Date.now();
+        let items = []
+        for (let i = 0; i < 5; i++) {
+          items.push(base + i)
+        }
+
+        this.setState({
+          itmes: items
+        })
+      }
+
+      render() {
+        return e('div', null,
+          [title, blockA, blockB, blockC]
+        )
+      }
+    }
+
+    // ## ReactDOM.render is no longer supported in React 18. Use createRoot ##
+    // ReactDOM.render(
+    //   APP(),
+    //   document.querySelector('#root')
+    // );
+
+    const root = ReactDOM.createRoot(document.getElementById("root"));
+    root.render(new App())
+  </script>
+
+</body>
+
+</html>

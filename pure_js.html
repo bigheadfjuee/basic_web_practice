@@ -12,6 +12,7 @@
 
 <body>
   <div class="container">
+    <h1>Pure JS</h1>
 
     <div>
       <label id="labelCount"></label>
@@ -62,12 +63,12 @@
       list.replaceChildren()
 
       const base = Date.now();
-      let array = []
+      let items = []
       for (let i = 0; i < 5; i++) {
-        array.push(base + i)
+        items.push(base + i)
       }
 
-      array.forEach(element => {
+      items.forEach(element => {
         const node = document.createElement('li')
         node.textContent = element
         list.appendChild(node)
