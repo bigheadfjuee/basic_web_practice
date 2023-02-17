@@ -18,34 +18,21 @@
   <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
 
   <script>
-    // Tony : 使用 React.createElement 就是這麼麻煩
-    // 體驗過原本的寫法，就會知道 JSX 語法糖的好處
+    const e = React.createElement // 用這個宣告可以少打很多字
 
-    const e = React.createElement // 可少打很多字
-
-    const title = e('h1', null, 'React - createElement')
-
-    const blockA = e(
-      'div', null, [
-      e('label', { id: 'labelCount', onClick: () => this.getState() })
-      , e('button', { id: 'btnCount' }, '++Count')
-    ])
-
-    const blockB = e(
-      'div', null, [
-      e('input', { type: 'text' }), e('label', { id: 'label' }, 'text')
-    ])
-
-    const blockC = e(
-      'div', null, [
-      e('button', { id: 'btnGetApiData' }, 'Get API Data')
-    ])
+    function statelessComponent () {
+      return e('h2', null, 'Stateless Component')
+    }
 
     class App extends React.Component {
+
       constructor(props) {
         super(props);
-        // Don't call this.setState() here!
-        this.state = { counter: 0, text:'', items: [] };
+        this.state = {
+          count: 0,
+          text: 'text',
+          items: []
+        };
       }
 
       increaseCount = () => {
@@ -62,24 +49,47 @@
 
       getApiData = () => {
         const base = Date.now();
-        let items = []
+        let newItems = []
         for (let i = 0; i < 5; i++) {
-          items.push(base + i)
+          newItems.push(base + i)
         }
 
         this.setState({
-          items: items
+          items: newItems
         })
       }
 
+      itemsToList = () => this.state.items.map((item)=>
+        e('li', { key: item},  item)
+      )
+
+      // 使用原生 React.createElement 的寫法，在 render 時就是這麼麻煩
+      // 先體驗原生的寫法，之後就會知道 JSX 語法糖的好處
       render() {
         return e('div', null, [
-          title, blockA, blockB, blockC
+          e('h1', null, this.props.title),
+          statelessComponent(),
+          e('div', null, [
+            e('label', { id: 'labelCount' }, this.state.count),
+            e('button', { id: 'btnCount', onClick: () => this.increaseCount() }, '++Count')
+          ]),
+          e('div', null, [
+            e('input', { type: 'text', onChange: (e) => this.handleInput(e), value: this.state.text }),
+            e('label', { id: 'label' }, this.state.text)
+          ]),
+          e('div', null, [
+            e('button', { id: 'btnGetApiData', onClick: () => this.getApiData() }, 'Get API Data'),
+            e('ul', null, this.itemsToList())
+          ]),
+          
         ])
       }
+
     }
 
     // ## ReactDOM.render is no longer supported in React 18. Use createRoot ##
+    // ReactDOM.render(e(App), document.getElementById('root'));
+
     const root = ReactDOM.createRoot(document.getElementById('root'));
     root.render(e(App, { title: 'React - createElement' }),
       document.querySelector('#root'));

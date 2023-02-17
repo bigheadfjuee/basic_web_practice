@@ -21,7 +21,7 @@
   <script src="MyReactComponent.js"></script>
   <script>
     const root = ReactDOM.createRoot(document.getElementById('root'));
-    root.render(e(MyReactComponent, {title: 'React - Component'}),
+    root.render(React.createElement(MyReactComponent, {title: 'React - Component'}),
       document.querySelector('#root'));
   </script>
 
