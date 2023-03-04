@@ -1,0 +1,109 @@
+<!-- https://element-plus.org/en-US/guide/installation.html#hello-world -->
+
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <script src="https://unpkg.com/vue@next"></script>
+  <!-- import CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/element-plus/dist/index.css">
+  <!-- import JavaScript -->
+  <script src="https://unpkg.com/element-plus"></script>
+  <title>Element Plus demo</title>
+  <script src="https://unpkg.com/@element-plus/icons-vue"></script>
+</head>
+
+<body>
+  <div id="app">
+
+    <!-- https://element-plus.org/en-US/component/transfer.html#basic-usage -->
+    <div class="demo">
+      <el-transfer v-model="value" :data="data" />
+    </div>
+
+    <!-- https://element-plus.org/en-US/component/upload.html#photo-wall -->
+    <div class="demo">
+      <el-upload v-model:file-list="fileList" list-type="picture-card" :on-preview="handlePictureCardPreview"
+        :on-remove="handleRemove">
+        <el-icon>
+          <Plus />
+        </el-icon>
+      </el-upload>
+      <el-dialog v-model="dialogVisible">
+        <img w-full :src="dialogImageUrl" alt="Preview Image" />
+      </el-dialog>
+    </div>
+  </div>
+
+
+  <script>
+    const { createApp, ref } = Vue
+
+    const App = {
+      setup() {
+
+        // transfer
+        const generateData = () => {
+          const data = []
+          for (let i = 1; i <= 15; i++) {
+            data.push({
+              key: i,
+              label: `Option ${i}`,
+              disabled: i % 4 === 0,
+            })
+          }
+          return data
+        }
+        const data = ref(generateData())
+        const value = ref([])
+
+        // photo-wall
+        const dialogImageUrl = ref('')
+        const dialogVisible = ref(false)
+        const generatePic = () => {
+          const img = []
+          for (let i = 0; i < 8; i++) {
+            img.push({
+              name: `Picsum${i}.jpeg`,
+              url: `https://picsum.photos/300?random=${i}`,
+            })
+          }
+          return img
+        }
+        const fileList = ref(generatePic())
+
+        const handleRemove = (uploadFile, uploadFiles) => {
+          console.log(uploadFile, uploadFiles)
+        }
+
+        const handlePictureCardPreview = (uploadFile) => {
+          dialogImageUrl.value = uploadFile.url
+          dialogVisible.value = true
+        }
+
+        return { data, value, dialogImageUrl, fileList, dialogVisible, handleRemove, handlePictureCardPreview }
+      }
+    };
+
+
+    const app = Vue.createApp(App)
+
+    // ElementPlus Icons-Vue
+    for ([name, comp] of Object.entries(ElementPlusIconsVue)) {
+      app.component(name, comp)
+    }
+
+    app.use(ElementPlus)
+    app.mount("#app");
+  </script>
+
+
+  <style>
+    .demo {
+      margin: 2em;
+    }
+  </style>
+</body>
+
+</html>

@@ -21,8 +21,11 @@
   <!-- 引入 babel 後，就可直接使用 JSX  -->
   <script type="text/babel">
 
+    // 改用 React 的 Function Component 
     const App = (props) => {
       const { title } = props
+
+      // 使用 Hook 在處理 state 時是不是精簡多了！
       const [count, setCount] = React.useState(0)
       const [text, setText] = React.useState('text')
       const [items , setItems] = React.useState([])

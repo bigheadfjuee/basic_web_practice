@@ -46,16 +46,22 @@
 
       getApiData = () => {
         const base = Date.now();
-        let items = []
+        let newItems = []
         for (let i = 0; i < 5; i++) {
-          items.push(base + i)
+          newItems.push(base + i)
         }
 
         this.setState({
-          itmes: items
+          items: newItems
         })
       }
 
+      itemsToList = () => this.state.items.map((item)=>
+        <li key={item}> {item} </li>
+      )
+
+      // JSX 語法糖，最後也是呼叫 React.createElement
+      // 但開發寫程式時，會比較精簡和易讀
       render() {
         return (
           <div>
@@ -73,9 +79,7 @@
             <div>
               <button onClick={this.getApiData}>Get API Data</button>
               <ul>
-                {this.state.items.map(item => (
-                <li key={item}>{item}</li>
-              ))}
+                {this.itemsToList()}
               </ul>
             </div>
           </div>

@@ -47,7 +47,7 @@
     const { createApp, ref } = Vue
 
     // Vue3.0 Composition API
-    createApp({
+    const app = createApp({
       setup() {
         const title = ref('Vue - Global Build')
         const count = ref(0)
@@ -68,25 +68,26 @@
     }).mount('#app')
 
     // Vue 3.0/2.x Options API
-    /*     createApp({
-          data() {
-            return {
-              count: 0,
-              text: "text",
-              itmes: [],
-            }
-          },
-          methods: {
-            getApiData() {
-              this.itmes = [] // clear
-    
-              const base = Date.now();
-              for (let i = 0; i < 5; i++) {
-                this.itmes.push(base + i)
-              }
-            },
-          },
-        }).mount('#app') */
+    /* const app = createApp({
+      data() {
+        return {
+          title : ref('Vue - Global Build'),
+          count: 0,
+          text: "text",
+          itmes: [],
+        }
+      },
+      methods: {
+        getApiData() {
+          this.itmes = [] // clear
+ 
+          const base = Date.now();
+          for (let i = 0; i < 5; i++) {
+            this.itmes.push(base + i)
+          }
+        },
+      },
+    }).mount('#app') */
 
 
   </script>
